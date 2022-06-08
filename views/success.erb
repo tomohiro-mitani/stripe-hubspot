@@ -1,0 +1,27 @@
+<div class="relative">
+  <div class="mx-auto">
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img class="w-full invisible lg:visible" src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80">
+        <div class="absolute inset-0 lg:bg-gray-300 bg-gray-300" style="mix-blend-mode: multiply;"></div>
+      </div>
+      <div class="relative px-4 py-16 xl:py-72">
+        <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <span class="block text-black lg:text-white">Done!</span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-center text-xl text-gray-500 lg:text-white sm:max-w-3xl">
+          You just activated your account!
+        </p>
+        <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center ">
+          <div class="justify-center">
+            <div><form method="POST" action="/create-customer-portal-session">
+              <input type="hidden" name="customer" value=<%= @subscription.customer.id %>>
+                            <input type="hidden" name="subscription" value=<%= @subscription.id %>>
+              <button type="submit" class="brand-secondary-color flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-opacity-60 hover:bg-opacity-70 sm:px-8">Manage billing</button>
+            </form></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
