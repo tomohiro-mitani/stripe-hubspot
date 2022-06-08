@@ -1,20 +1,13 @@
-# Simple Monthly Billing
+# Stripe and Hubspot Integration
 
-This simple monthly billing demo was originally built for the Gogo Inflight Wifi EBC presentation, but we've since repurposed it to just be a more generic billing demo to show creating a monthly, fixed priced subscription with Stripe. It follows relatively closely the ["Simple monthly billing" example in our docs](https://stripe.com/docs/billing/subscriptions/examples#simple-monthly-billing).
+This simple demo was  built to show quote to cash automation by using Stripe and Hubspot. Products in Stripe are integrated with that of Hubspot by using Integorate. A scenario in Integorate listens to the Stripe events. Whenever a product is created in Stripe, Integorate will create the equivalent product in Hubspot.
 
-**You can try the app live at [https://simple-monthly-billing.stripedemos.com/](https://simple-monthly-billing.stripedemos.com/).**
 
 <img width="2069" alt="Screen Shot 2021-10-21 at 10 59 53 AM" src="https://git.corp.stripe.com/storage/user/4247/files/0d1d9580-325e-11ec-80bb-38f3c8e10ff3">
 
 ## Overview
 
-This demo has the following features, Stripe products, and Stripe integrations:
-<!-- prettier-ignore -->
-|     |Features
-:---: | :---
-📦|**Products and Prices.** Furni uses the Stripe [Products and Prices](https://stripe.com/docs/billing/prices-guide) APIs.
-⚡️|**Customers.** Furni allows customers to create accounts which creates new [Customers](https://stripe.com/docs/billing/customer) in Stripe to save purchase history.
-💳|**Elements** This demo uses pre-built Stripe components customized to fit the app design, including the [Stripe Elements](https://stripe.com/docs/elements) which provides real-time validation, formatting, and localization.
+This demo has the following features, Stripe products, and Hubspot integrations:
 
 ## Running locally
 
@@ -53,5 +46,5 @@ If you'd like to wipe the slate clean and start with a fresh environment, you ca
 
 
 ## Credits
-* Code: [David Santoso](https://home.corp.stripe.com/people/davidsantoso)
+* Code: [Tomohiro Mitani, David Santoso]
 * Stock photos provided by [Unsplash](https://unsplash.com/)
