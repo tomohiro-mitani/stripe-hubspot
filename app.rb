@@ -64,7 +64,6 @@ def get_stripe_price_id_array(line_items_array)
       puts error_message
     end
     begin
- 
       url = URI("https://api.hubapi.com/crm-objects/v1/objects/products/" + product_id + "?hapikey=" + hapi_api_key + "&properties=stripe_price_id")
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
@@ -198,8 +197,9 @@ post '/subscribe' do
     # create customer for email with params[:pm_id]
     customer = Stripe::Customer.create({
       email: params[:email],
-      name: [params[:first_name], params[:last_name]].join(" "),
+      name: params[:company_name],
       payment_method: params[:payment_method_id],
+      metadata: {contact_name: [params[:last_name], params[:first_name]].join(" ")},
     })
 
    subscription = Stripe::Subscription.create({
