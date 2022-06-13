@@ -13,6 +13,12 @@ This demo has the following features, Stripe products, and Hubspot integrations:
 
 ### Getting Started
 
+Sync products between Stripe and HubSpot through using Integromat.
+
+Create a subscription product in Stripe and let Integromat sync the product in HubSpot.
+
+Create a HubSpot deal with products as line items.
+
 Clone the repo and install dependencies:
 
 ```
@@ -32,6 +38,6 @@ Run the app!
 $ bundle exec ruby app.rb
 ```
 
-Go to [http://localhost:4567](http://localhost:4567) in your browser to start using the demo.
+Go to [http://localhost:4567/?deal=DEAL_ID](http://localhost:4567/?deal=DEAL_ID) in your browser to start using the demo.
 
 

@@ -118,6 +118,40 @@ def get_products_amount_array(stripe_price_id_array, unit_amount_array)
   products_amount_array
 end
 
+def get_contact_from_deal(deal)
+  hapi_api_key = ENV["HS_KEY"]
+  url = URI("https://api.hubapi.com/crm/v3/objects/deals/" + deal + "/associations/contacts?hapikey=" + hapi_api_key)
+
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  
+  request = Net::HTTP::Get.new(url)
+  request["accept"] = 'application/json'
+  
+  response = http.request(request)
+  puts response.read_body
+  contact_id = JSON.parse(response.read_body)["results"][0]["id"] 
+  contact_id
+end
+
+def get_company_from_deal(deal)
+  hapi_api_key = ENV["HS_KEY"]
+  url = URI("https://api.hubapi.com/crm/v3/objects/deals/" + @deal + "/associations/companies?hapikey=" + hapi_api_key)
+
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  request = Net::HTTP::Get.new(url)
+  request["accept"] = 'application/json'
+
+  response = http.request(request)
+  puts response.read_body
+  company_id = JSON.parse(response.read_body)["results"][0]["id"]
+  company_id
+end
+
 get '/' do
   
   @deal = params[:deal]
@@ -132,33 +166,12 @@ get '/' do
 end
 
 get '/checkout' do
-  hapi_api_key = ENV["HS_KEY"]
+  # get contact from deal
   @deal = params[:deal]
-  url = URI("https://api.hubapi.com/crm/v3/objects/deals/" + @deal + "/associations/contacts?hapikey=" + hapi_api_key)
+  contact_id = get_contact_from_deal(@deal)
 
-  http = Net::HTTP.new(url.host, url.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  
-  request = Net::HTTP::Get.new(url)
-  request["accept"] = 'application/json'
-  
-  response = http.request(request)
-  puts response.read_body
-  contact_id = JSON.parse(response.read_body)["results"][0]["id"] 
-
-  url = URI("https://api.hubapi.com/crm/v3/objects/deals/" + @deal + "/associations/companies?hapikey=" + hapi_api_key)
-
-  http = Net::HTTP.new(url.host, url.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-  request = Net::HTTP::Get.new(url)
-  request["accept"] = 'application/json'
-
-  response = http.request(request)
-  puts response.read_body
-  company_id = JSON.parse(response.read_body)["results"][0]["id"]
+  # get company from deal
+  company_id = get_company_from_deal(@deal)
 
   begin    
     api_response = Hubspot::Crm::Contacts::BasicApi.new.get_by_id(contact_id, archived: false, auth_names: "hapikey")
